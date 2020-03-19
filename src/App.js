@@ -1,12 +1,29 @@
-import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import Header from "./components/header";
 import Photo from "./components/photo";
 import Description from "./components/description";
+import styled from "styled-components";
 
 function App() {
+  const Container = styled.div`
+    background: yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `;
+  const ImageContainer = styled.div`
+    height: 10%;
+  `;
+  const TextContainer = styled.div`
+    border: 1px black solid;
+    width: 50%;
+
+    padding: 15px;
+    background-color: rgba(252, 252, 252, 0.692);
+  `;
+
   const [nasaInfo, setNasaInfo] = useState([]);
 
   useEffect(() => {
@@ -24,16 +41,20 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <Container>
       <Header />
-      <Photo key={nasaInfo.date} imgUrl={nasaInfo.url} />
-      <Description
-        key={nasaInfo.title}
-        title={nasaInfo.title}
-        date={nasaInfo.date}
-        explanation={nasaInfo.explanation}
-      />
-    </div>
+      <ImageContainer>
+        <Photo key={nasaInfo.date} imgUrl={nasaInfo.url} />
+      </ImageContainer>
+      <TextContainer>
+        <Description
+          key={nasaInfo.title}
+          title={nasaInfo.title}
+          date={nasaInfo.date}
+          explanation={nasaInfo.explanation}
+        />
+      </TextContainer>
+    </Container>
   );
 }
 
